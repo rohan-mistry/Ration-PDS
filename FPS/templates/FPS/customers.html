@@ -1,0 +1,86 @@
+{% extends 'FPS/base.html'%}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">Registered Customers</h4>
+          
+        </div>
+        <div class="card-body">
+          {% if customers %}
+             <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                  No.
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Ration ID
+                </th>
+                <th>
+                 Address
+                </th>
+                
+              </thead>
+              <tbody>
+                {% for customer in customers %}
+                  <tr>
+                    <td>
+                      {{ customer.pk }}
+                    </td>
+                    <td>
+                     {{ customer.fname|add:" "|add:customer.lname}}
+                    </td>
+                    <td>
+                     {{ customer.rationid }}
+                    </td>
+                    <td>
+                      {{ customer.address }}
+                    </td>
+                  </tr>
+                {% endfor %}
+                
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination pull-right">
+            <span class="step-links">
+                {% if customers.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-outline-primary " href="?page={{ customers.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ customers.number }} of {{ customers.paginator.num_pages }}
+                </span>
+        
+                {% if customers.has_next %}
+                    <a class="btn btn-outline-primary " href="?page={{ customers.next_page_number }}">next</a>
+                    <a class="btn btn-outline-primary " href="?page={{ customers.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+          </div>
+          {% else %}
+              No registered Customers
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var path= location.href
+
+    console.log(path);
+  </script> 
+  <script>
+    $(document).ready(function() {
+      $('#tab4').addClass('active');
+    });
+  </script>
+{% endblock %}

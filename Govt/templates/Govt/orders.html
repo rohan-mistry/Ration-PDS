@@ -1,0 +1,79 @@
+{% extends 'Govt/base.html' %}
+{% load getShopName %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">FPS Stock Requests</h4>
+          
+        </div>
+        <div class="card-body">
+          {% if orders %}
+            <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                 Shop ID
+                </th>
+                <th>
+                 Shop Name
+                </th>
+                <th>
+                  Date
+                </th>
+               
+               
+              </thead>
+              <tbody>
+                {% for order in orders %}
+                  <tr>
+                  <td>
+                   {{ order.shop.shopid }}
+                  </td>
+                  <td>
+                    {{ order.shop.shopid|getShopName }}
+                  </td>
+                  <td>
+                    {{ order.date }}
+                  </td>
+                 
+                  
+                </tr>
+                {% endfor %}
+                
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination pull-right">
+            <span class="step-links">
+                {% if orders.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-outline-primary " href="?page={{ orders.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ orders.number }} of {{ orders.paginator.num_pages }}
+                </span>
+        
+                {% if orders.has_next %}
+                    <a class="btn btn-outline-primary " href="?page={{ orders.next_page_number }}">next</a>
+                    <a class="btn btn-outline-primary " href="?page={{ orders.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+          {% else %}
+            <p>No Pending Orders</p>
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function() {
+      $('#tab3').addClass('active');
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,237 @@
+{% extends 'Govt/base.html' %}
+{% load getShopName %}
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">Monthly Reports</h4>
+         
+        </div>
+        <div class="card-body">
+          
+      
+            {% if reports %}
+            <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                 Shop ID
+                </th>
+                <th>
+                 Shop Name
+                </th>
+                <th>
+                  Date
+                </th>
+                <th>
+                  Report
+                </th>
+               
+              </thead>
+              <tbody>
+                {% for report in reports %}
+                  <tr>
+                  <td>
+                   {{ report.shop.shopid }}
+                  </td>
+                  <td>
+                    {{ report.shop.shopid|getShopName }}
+                  </td>
+                  <td>
+                    {{ report.date }}
+                  </td>
+                  <td>
+                  <!--% url 'pdf' pk=report.shop.shopid %  -->
+                    <a target="_blank" href="{% url 'showPdf' shop=report.shop.shopid month=report.date_month year=report.date_year %}" class="btn btn-success">View</a>
+                  </td>
+                  
+                </tr>
+                {% endfor %}
+                
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination pull-right">
+            <span class="step-links">
+                {% if reports.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-outline-primary " href="?page={{ reports.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ reports.number }} of {{ reports.paginator.num_pages }}
+                </span>
+        
+                {% if reports.has_next %}
+                    <a class="btn btn-outline-primary " href="?page={{ reports.next_page_number }}">next</a>
+                    <a class="btn btn-outline-primary " href="?page={{ reports.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+          </div>
+           {% else %}
+            <p>No reports found</p>
+           {%endif%}
+        
+           
+          
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-primary">
+                <h4 class="card-title ">Search Data</h4>
+     
+            </div>
+            <div class="card-body">
+              <form>
+                {% csrf_token %}           
+             
+               <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                      <div class="input-group no-border">
+                          <input type="text" name="rationid" id="rationid" class="form-control" placeholder="Enter Shop ID...">
+                          
+                      </div>
+                    </div>
+                    
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                      
+                        <select class="form-control" name="date_month" id="month" style="-webkit-appearance: menulist;">
+                            <option value="" selected disabled hidden>Select Month</option>
+                            <option  value='1'>Janaury</option>
+                            <option value='2'>February</option>
+                            <option value='3'>March</option>
+                            <option value='4'>April</option>
+                            <option value='5'>May</option>
+                            <option value='6'>June</option>
+                            <option value='7'>July</option>
+                            <option value='8'>August</option>
+                            <option value='9'>September</option>
+                            <option value='10'>October</option>
+                            <option value='11'>November</option>
+                            <option value='12'>December</option>
+                        </select>
+                      </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                      <select class="form-control" name="date_year" id="year" style="-webkit-appearance: menulist;">
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-2" >
+                  <button  type="button" id="searchReport"  class="btn btn-success  float-right">See Data</button>
+              </div>
+                
+               </div>
+              </form>
+            <div class="row" >
+                <div class="col-md-12" id="showReport">
+
+                </div>
+               
+                
+            </div>
+            </div>
+        </div>
+    </div>    
+</div>
+  <script>
+    $(document).ready(function() {
+      $('#tab2').addClass('active');
+    });
+  </script>
+  <script>
+    var start = 1900;
+    var end = new Date().getFullYear();
+    var options = "<option value='' selected disabled hidden>Select Year</option>";
+    for(var year = end ; year >=start; year--){
+        options += "<option value="+year+">"+ year +"</option>";
+    }
+    document.getElementById("year").innerHTML = options;
+</script>
+<script>
+  $(document).ready(function(){
+    $('#searchReport').on('click',function(e){
+      e.preventDefault();
+      var csrfToken = $("input[name=csrfmiddlewaretoken]").val();
+      var ration_id = $('#rationid').val();
+      var month = $('#month').val();
+      var year = $('#year').val();
+      var months= ["January","February","March","April","May","June","July","August","September","October","November","December"]
+      console.log(month);
+      console.log(year);
+      console.log(ration_id)
+      console.log('called');
+      $.ajax({
+        type : "post",
+        url : "/searchReport/",
+        data : {
+          csrfmiddlewaretoken :  csrfToken,
+          month : month,
+          year : year,
+          rationid : ration_id
+        },
+        success : function(response){
+          $('#showReport').html('');
+          if (response.found)
+          {
+            console.log('responsed');
+            console.log(response.report_data);
+           
+            $('#showReport').append(''+
+            '<div class="table-responsive">'+
+            '<table class="table">'+
+              '<thead class=" text-primary">'+
+                '<th>'+
+                 'Shop ID'+
+                '</th>'+
+               '<th>' +
+               'Shop Name'+ 
+               '</th>'+   
+               '<th>'+ 
+                'Date'+   
+                '</th>'+  
+                '<th>'+  
+                  'Report'+  
+                  '</th>'+ 
+               
+                  '</thead>'+ 
+                  '<tbody>'+ 
+                    '<tr>'+
+                      '<td>'+ 
+                         response.report_data.shopid +
+                        '</td>'+ 
+                        '<td>'+
+                           response.report_data.shopname+
+                          '</td>'+
+                          '<td>'+ 
+                            months[response.report_data.date_month-1] +','+response.report_data.date_year+
+                            '</td>'+ 
+                            '<td>'+
+                              '<a target="_blank" href="/report/'+response.report_data.shopid+'/'+  response.report_data.date_month+'/'+ response.report_data.date_year+'" class="btn btn-success">View</a>'+  
+                              '</td>'+
+                              '</tr>'+ 
+                              '</tbody>'+
+                              '</table>'+
+                              '</div>'+
+            '')
+          }
+          else 
+          {
+            $('#showReport').append('<div class="alert alert-danger m-3"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button><span><b> No Report Found !</b> </span></div>')
+          }
+        }
+      })
+    })
+  })
+</script>
+{% endblock %}

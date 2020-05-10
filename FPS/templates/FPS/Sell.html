@@ -1,0 +1,254 @@
+{% extends 'FPS/base.html'%}
+{% block content %}
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+        <form class="navbar-form">
+            <div class="input-group no-border">
+              <input type="text" value="" class="form-control" id="searchText" placeholder="Search...">
+              <button type="button" id="searchUser" class="btn btn-white btn-round btn-just-icon">
+                <i class="material-icons">search</i>
+                <div class="ripple-container"></div>
+              </button>
+            </div>
+        </form>
+        <div id="notifications">
+        </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+</div>  
+<div class="row">
+    
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Ration Detail</h4>
+          
+        </div>
+        <div class="card-body">
+          {% if messages %}
+          
+              {% for message in messages %}
+                  {% ifequal message.tags 'error' %}
+                    <div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}<strong>Important:</strong>  {% endif %} {{ message }}
+                    </div>
+                  {% else %}
+                    <div {% if message.tags %}  class="alert alert-{{ message.tags }}"{% endif %}>
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ message }}
+                    </div>
+                  {% endifequal %}
+                  
+              
+              {% endfor %}
+         
+          {% endif %}
+          <form method="post">
+            {% csrf_token %}
+          
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Ration ID</label>
+                  <input type="text" name="rationid" id="id_rationid" class="form-control">
+                </div>
+              </div>
+            </div>
+            <h3>Quantity : </h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Wheat</label>
+                  <input type="number" name="wheat" id="id_wheat" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Rice</label>
+                  <input type="number" name="rice" id="id_rice" class="form-control">
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Dal</label>
+                    <input type="number" name="dal" id="id_dal" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Kerosene</label>
+                    <input type="number" name="kerosene" id="id_kerosene" class="form-control">
+                  </div>
+                </div>
+                
+              </div>
+            
+            <button type="submit" class="btn btn-primary pull-right">Update </button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">Sales</h4>
+          
+        </div>
+        <div class="card-body">
+          {% if sales %}
+             <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class=" text-primary">
+                <th>
+                  No.
+                </th>
+                <th>
+                  Ration ID
+                </th>
+                <th>
+                 Date
+                </th>
+                
+              </thead>
+              <tbody>
+                {% for data in sales %}
+                  <tr data-toggle="modal" data-target="#{{ data.pk }}">
+                    <td>
+                      {{ data.pk }}
+                    </td>
+                  
+                    <td>
+                     {{ data.rationid }}
+                    </td>
+                    <td>
+                      {{ data.date }}
+                    </td>
+                    <div class="modal fade" id="{{ data.pk }}">
+                      <div class="modal-dialog ">
+                        <div class="modal-content">
+                        
+                         
+                          <div class="modal-header">
+                            <h4 class="modal-title">Description</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          </div>
+                          
+                       
+                          <div class="modal-body" >
+                            <div class="row">
+                              <div class="col-md-6">
+                                Rice :
+                              </div>
+                              <div class="col-md-6">
+                                {{ data.rice }} Kg
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                Dal :
+                              </div>
+                              <div class="col-md-6">
+                                {{ data.dal }} Kg
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                Wheat :
+                              </div>
+                              <div class="col-md-6">
+                                {{ data.wheat }} Kg
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                Kerosene :
+                              </div>
+                              <div class="col-md-6">
+                                {{ data.kerosene }} L
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </tr>
+                {% endfor %}
+                
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination pull-right">
+            <span class="step-links">
+                {% if sales.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-outline-primary " href="?page={{ sales.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ sales.number }} of {{ sales.paginator.num_pages }}
+                </span>
+        
+                {% if sales.has_next %}
+                    <a class="btn btn-outline-primary " href="?page={{ sales.next_page_number }}">next</a>
+                    <a class="btn btn-outline-primary " href="?page={{ sales.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+          </div>
+          {% else %}
+              No sales yet
+          {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div> 
+  <script>
+    $(document).ready(function() {
+      var csrfToken = $("input[name=csrfmiddlewaretoken]").val();
+      $('#searchUser').on('click',function(e) {
+        e.preventDefault();
+        var text = $('#searchText').val();
+        console.log(text);
+        
+        $.ajax({
+        type: "post",
+        url: "/search/",
+        data: {
+          csrfmiddlewaretoken : csrfToken,
+          text : text
+        },
+        success: function(response) {
+          $('#notifications').html('');
+          if(response.found)
+          {
+            $('#notifications').append('<div class="alert alert-success m-3"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button><span><b> Registered !</b> </span></div>')
+          }
+          else
+          {
+            $('#notifications').append('<div class="alert alert-danger m-3"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button><span><b> Not Registered !</b> </span></div>')
+          }
+        },
+      });
+      })
+    })
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#tab2').addClass('active');
+    });
+  </script>
+{% endblock %}

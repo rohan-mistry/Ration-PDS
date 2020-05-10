@@ -1,0 +1,142 @@
+{% extends 'Govt/base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">PDS Customer Registration</h4>
+        </div>
+        <div class="card-body">
+          <!-- form1 -->
+          <!-- {{form1}} -->
+          <!-- end -->
+          <form method="post">
+           
+            {% csrf_token %}
+           
+            <div class="row">
+             
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Name</label>
+                  <input type="text" name="fname" id="id_fname" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Last Name</label>
+                  <input type="text" name="lname" id="id_lname" class="form-control">
+                </div>
+              </div>
+            </div>
+            
+           
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Address</label>
+                  <input type="text" name="address" id="id_address" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Ration ID</label>
+                    <input type="text" name="rationid" id="id_rationid" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Shop ID</label>
+                    <input type="text" name="shopid" id="id_shopid" class="form-control">
+                  </div>
+                </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">OTP</label>
+                  <input type="number" name="fire_otp" id="id_fire_otp" class="form-control">
+                </div>
+              </div>
+          </div>
+              
+            <button type="submit" class="btn btn-primary pull-right">ADD </button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>     
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">PDS FPS Registration</h4>
+        </div>
+        <div class="card-body">
+           <!-- form2 -->
+           <!-- {{form2}} -->
+           <!-- end -->
+          <form method="post">
+           
+            {% csrf_token %}
+           
+            <div class="row">
+             
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Shop Name</label>
+                  <input type="text" name="sname" id="id_sname" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Address</label>
+                  <input type="text" name="address" id="id_address" class="form-control">
+                </div>
+              </div>
+            </div>
+            
+           
+            
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Shop ID</label>
+                    <input type="text" name="shopid" id="id_shopid" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">OTP</label>
+                    <input type="text" name="secret_code" id="id_secret_code" class="form-control">
+                  </div>
+                </div>
+            </div>
+            
+            
+              
+            <button type="submit" class="btn btn-primary pull-right">ADD </button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>     
+  <script>
+    $(document).ready(function() {
+      $('#tab5').addClass('active');
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'Govt/base.html' %}
+{% block content %}
+<div class="row">
+    
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Ration Detail</h4>
+          
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Shop ID</label>
+                  <input type="text" name="shopid" id="id_shopid" class="form-control">
+                </div>
+              </div>
+   
+            </div>
+            
+            <h3>Quantity : </h3>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Wheat</label>
+                  <input type="number" name="wheat" id="id_wheat" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="bmd-label-floating">Rice</label>
+                  <input type="number" name="rice" id="id_rice" class="form-control">
+                </div>
+              </div>
+              
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Dal</label>
+                    <input type="number" name="dal" id="id_dal" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="bmd-label-floating">Kerosene</label>
+                    <input type="number" name="kerosene" id="id_kerosene" class="form-control">
+                  </div>
+                </div>
+                
+              </div>
+              
+            <button type="submit" class="btn btn-primary pull-right">Send </button>
+            <div class="clearfix"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+  <div class="row">
+    
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">Stocks Sent</h4>
+          
+        </div>
+        <div class="card-body">
+        {% if sent %}
+         <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>
+                 Shop ID
+                </th>
+                
+                <th>
+                  Rice 
+                </th>
+                <th>
+                  Wheat
+                </th>
+                <th>
+                  Dal
+                </th>
+                <th>
+                  Kerosene
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  Date
+                </th>
+                
+              </thead>
+              <tbody>
+
+               {% for stock in sent %}
+                <tr>
+                  <td>
+                    {{ stock.shopid }}
+                  </td>
+                  <td>
+                    {{ stock.rice }}
+                  </td>
+                  <td>
+                    {{ stock.wheat }}
+                  </td>
+                  <td>
+                    {{ stock.dal }}
+                  </td>
+                  <td>
+                    {{ stock.kerosene }}
+                  </td>
+                  <td>
+                    {% if stock.status %}
+                      <span class="text-success">Accepted</span>  
+                    {% else %}
+                    <span class="text-danger">Not Accepted</span> 
+                    {% endif %}
+                  </td>
+                  <td>
+                    {{ stock.date }}
+                  </td>
+                 
+                </tr>
+               {% endfor %}
+               
+                
+               
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination pull-right">
+            <span class="step-links">
+                {% if sent.has_previous %}
+                    <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-outline-primary " href="?page={{ sent.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ sent.number }} of {{ sent.paginator.num_pages }}
+                </span>
+        
+                {% if sent.has_next %}
+                    <a class="btn btn-outline-primary " href="?page={{ sent.next_page_number }}">next</a>
+                    <a class="btn btn-outline-primary " href="?page={{ sent.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        {% else %}
+        <p>No stocks sent</p>
+        {% endif %}
+          
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+  <script>
+    $(document).ready(function() {
+      $('#tab1').addClass('active');
+    });
+  </script>
+{% endblock %}

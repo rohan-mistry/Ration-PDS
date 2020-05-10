@@ -1,0 +1,210 @@
+{% extends 'FPS/base.html'%}
+{% block content %}
+<div class="row">
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-warning card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">content_copy</i>
+        </div>
+        <p class="card-category">Wheat</p>
+        <h3 class="card-title">{% if stock.wheat %}{{ stock.wheat }}{% else %}0{% endif %} Kg</h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-success card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">store</i>
+        </div>
+        <p class="card-category">Rice</p>
+        <h3 class="card-title">{% if stock.rice %}{{ stock.rice }}{% else %}0{% endif %} Kg</h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-danger card-header-icon">
+        <div class="card-icon">
+          <i class="material-icons">info_outline</i>
+        </div>
+        <p class="card-category">Dal</p>
+        <h3 class="card-title">{% if stock.dal %}{{ stock.dal }}{% else %}0{% endif %} Kg</h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+      <div class="card-header card-header-info card-header-icon">
+        <div class="card-icon">
+          <i class="fa fa-beer"></i>
+        </div>
+        <p class="card-category">Kerosene</p>
+        <h3 class="card-title">{% if stock.kerosene %}{{ stock.kerosene }}{% else %}0{% endif %} L</h3>
+      </div>
+      <div class="card-footer">
+        <div class="stats">
+          <i class="material-icons">update</i> Just Updated
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title text-center">Incoming Stocks</h4>
+        
+      </div>
+      <div class="card-body">
+        {% if incoming %}
+           <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class=" text-primary">
+              <th>
+                No.
+              </th>
+              <th>
+                Date
+              </th>
+              <th>
+               Status
+              </th>
+              
+              
+            </thead>
+            <tbody >
+              {% for stock in incoming %}
+              <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Open modal
+              </button> -->
+                <tr  data-toggle="modal" data-target="#{{ stock.pk }}">
+                  <td>
+                    {{ stock.pk }}
+                  </td>
+                  <td>
+                   {{ stock.date}}
+                  </td>
+                  <td>
+                    {% if stock.status %}
+                      <span class="text-success">Accepted</span>  
+                    {% else %}
+                    <span class="text-danger">Not Accepted</span> 
+                    {% endif %}
+                  </td>
+                  <div class="modal fade" id="{{ stock.pk }}">
+                    <div class="modal-dialog ">
+                      <div class="modal-content">
+                      
+                       
+                        <div class="modal-header">
+                          <h4 class="modal-title">Description</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        
+                     
+                        <div class="modal-body" >
+                          <div class="row">
+                            <div class="col-md-6">
+                              Rice :
+                            </div>
+                            <div class="col-md-6">
+                              {{ stock.rice }} Kg
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              Dal :
+                            </div>
+                            <div class="col-md-6">
+                              {{ stock.dal }} Kg
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              Wheat :
+                            </div>
+                            <div class="col-md-6">
+                              {{ stock.wheat }} Kg
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              Kerosene :
+                            </div>
+                            <div class="col-md-6">
+                              {{ stock.kerosene }} L
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row m-3 " >
+                            {% if stock.status %}
+                            <button type="button" class="btn btn-success btn-block" disabled> Accepted</button>
+                            {% else %}
+                           
+                              <a style="color: white;" class="btn btn-danger btn-block status"  href="{% url 'update_status' pk=stock.pk %}">
+                                Click to Accept
+                              </a>
+                            {% endif %}
+                            
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </tr>
+              {% endfor %}
+              
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination pull-right">
+          <span class="step-links">
+              {% if incoming.has_previous %}
+                  <a class="btn btn-outline-primary" href="?page=1">&laquo; first</a>
+                  <a class="btn btn-outline-primary " href="?page={{ incoming.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ incoming.number }} of {{ incoming.paginator.num_pages }}
+              </span>
+      
+              {% if incoming.has_next %}
+                  <a class="btn btn-outline-primary " href="?page={{ incoming.next_page_number }}">next</a>
+                  <a class="btn btn-outline-primary " href="?page={{ incoming.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+        </div>
+        {% else %}
+            No incoming stocks
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('#tab1').addClass('active');
+  });
+</script>
+{% endblock %} 

@@ -1,0 +1,226 @@
+{% extends 'Customer/base.html' %}
+{% block content%}
+<div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title text-center">Personal Details</h4>
+         
+        </div>
+        <div class="card-body">
+            
+        
+        
+            <!-- {% if info %} -->
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 ">
+                       <h5 style="display: inline;">Name :</h5> 
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div style="border-bottom: 1px solid black;">
+                            <!-- Rohan Mistry -->
+                            {{ info.fname }} {{ info.lname}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 col-sm-4">
+                        <h5 style="display: inline;">Address :</h5> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 ">
+                        <div style="border-bottom: 1px solid black;">
+                            <!-- No.U-15, J.V.P.D. Scheme,
+                            Bhaktivedanta Swami Marg,
+                            Opp.Cooper Hospital
+                            Vile Parle (West), Mumbai-400 056. India -->
+                            {{ info.address }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 col-sm-4">
+                        <h5 style="display: inline;">Ration ID :</h5> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 ">
+                        <div style="border-bottom: 1px solid black;text-transform: uppercase;">
+                           <!-- UDG734T347HV -->
+                           {{ info.rationid }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 col-sm-4">
+                        <h5 style="display: inline;">Ration Status This Month :</h5> 
+                    </div>
+                    <div class="col-md-8 col-sm-8 ">
+                        {% if generalData %}
+                        <span class="badge badge-success"><h4 style="display: inline;">Buyed</h4></span>
+                        <div class="mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Wheat</th>
+                                    <th>Rice</th>
+                                    <th>Dal</th>
+                                    <th>Kerosene</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{ generalData.wheat}} KG</td>
+                                    <td>{{ generalData.rice }} KG</td>
+                                    <td>{{ generalData.dal }} KG</td>
+                                    <td>{{ generalData.kerosene }} L</td>
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                        </div>
+                        {% else %}
+                        <span class="badge badge-danger"><h4 style="display: inline;">Not Buyed</h4></span>
+                        {% endif %}
+                        
+                        
+                        
+                    </div>
+                </div>
+                <!-- {% else %}
+                    No such user exists !
+                {% endif %} -->
+                
+         
+          
+        </div>
+      </div>
+    </div>
+  </div> 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Search Data</h4>
+         
+                </div>
+                <div class="card-body">
+                    <form >
+                        {% csrf_token %}
+                    
+                   <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                          
+                            <select class="form-control" name="date_month" id="month" style="-webkit-appearance: menulist;">
+                                <option value="" selected disabled hidden>Select Month</option>
+                                <option  value='1'>Janaury</option>
+                                <option value='2'>February</option>
+                                <option value='3'>March</option>
+                                <option value='4'>April</option>
+                                <option value='5'>May</option>
+                                <option value='6'>June</option>
+                                <option value='7'>July</option>
+                                <option value='8'>August</option>
+                                <option value='9'>September</option>
+                                <option value='10'>October</option>
+                                <option value='11'>November</option>
+                                <option value='12'>December</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" name="date_year" id="year" style="-webkit-appearance: menulist;">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2" >
+                        <button  type="button" id="searchData"  class="btn btn-success active float-right">See Data</button>
+                    </div>
+                    <div class="col-md-2"></div>
+                   </div>
+                </form>
+                <div class="row" >
+                    <div class="col-md-10 ml-auto mr-auto" id="showResult">
+
+                    </div>
+                    <!-- {% if dataSearch %}
+                    <div class="col-md-8 col-sm-8 ml-auto mr-auto ">
+                        
+                        <div class="mt-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Wheat</th>
+                                    <th>Rice</th>
+                                    <th>Dal</th>
+                                    <th>Kerosene</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>{{ dataSearch.wheat}} KG</td>
+                                    <td>{{ dataSearch.rice }} KG</td>
+                                    <td>{{ dataSearch.dal }} KG</td>
+                                    <td>{{ dataSearch.kerosene }} L</td>
+                                  </tr>
+                                 
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+                    {% else %}
+                        No data found for entered month !
+                    {% endif %} -->
+                    
+                </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <script>
+        var start = 1900;
+        var end = new Date().getFullYear();
+        var options = "<option value='' selected disabled hidden>Select Year</option>";
+        for(var year = end ; year >=start; year--){
+            options += "<option value="+year+">"+ year +"</option>";
+        }
+        document.getElementById("year").innerHTML = options;
+    </script>
+    <script>
+        $(document).ready(function() {
+          var csrfToken = $("input[name=csrfmiddlewaretoken]").val();
+          $('#searchData').on('click',function(e) {
+            e.preventDefault();
+            console.log('clicked');
+            var month = $('#month').val();
+            var year = $('#year').val();
+            var rationid = "{{ user.customer.ration_id }}";
+            console.log(month);
+            console.log(year);
+            console.log(rationid)
+            
+            $.ajax({
+                type: "post",
+                url: "/searchData/",
+                data: {
+                csrfmiddlewaretoken : csrfToken,
+                month : month,
+                year : year,
+                rationid : rationid
+                },
+                success: function(response) {
+                $('#showResult').html('');
+                if(response.found)
+                {
+                    $('#showResult').append('<div class="mt-3"><table class="table table-bordered"><thead><tr><th>Wheat</th><th>Rice</th><th>Dal</th><th>Kerosene</th></tr></thead><tbody><tr><td>'+ response.dataSearch.wheat +' KG</td><td>'+ response.dataSearch.rice +' KG</td><td>'+ response.dataSearch.dal +' KG</td><td>'+ response.dataSearch.kerosene +' L</td></tr></tbody></table> </div>' );
+                }
+                else
+                {
+                    $('#showResult').append('<div class="alert alert-danger m-3"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><i class="material-icons">close</i></button><span><b> No Data Found !</b> </span></div>')
+                }
+                },
+            });
+          })
+        })
+      </script>
+{% endblock %}
