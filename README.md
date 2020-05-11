@@ -3,9 +3,7 @@
 <br />
 <p align="center">
   
-    <img src="doc/img/emblem.png" alt="Logo" width="100" height="100">
-  
-
+  <img src="doc/img/emblem.png" alt="Logo" width="100" height="100">
   <h3 align="center">Ration-PDS</h3>
 
   <p align="center">
@@ -30,7 +28,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot]](https://example.com)  -->
 
 The Indian food security system was established by the Government Of India under the Ministry of Consumer Affairs, Food and Public Distribution to distribute food and non-food items to India's poor at subsidised rates.
 But the FPS have been misusing the grains recieved by the government for their own profits.To reduce such conspiracy ,was the main motive behind this project.
@@ -44,15 +42,8 @@ To handle the control of entire flow of the PDS system ,this application will be
 * [ReportLab](https://www.reportlab.com/opensource/)
 
 
-<!-- GETTING STARTED -->
-## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-
-
-### Installation
+## Installation
 
 Clone the repo
 ```sh
@@ -78,12 +69,32 @@ python manage.py runserver
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
+<!-- Features EXAMPLES -->
+## Features
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+- Government
+```sh
+➼ Govermnent login will be made by the admin of this application.
+➼ Govt can add the respective FPS and Customer with a unique OTP given to them for registering into this app.
+➼ Send Stocks to FPS and see the delivery status.
+➼ Stock Requests made by FPS.
+➼ Get the information of a particular customer and see their ration data.
+➼ Monthly Reports sent by FPS in pdf format.
+ 
+```
+- FPS
+```sh
+➼ Current stock available. 
+➼ Incoming stocks from the Government.
+➼ Sell Monthly ration to only registered customers under their shop.
+➼ Send monthly stock requests and reports. 
+➼ See registerd customers under their shop. 
+```
+- Customer
+```sh
+➼ See their info and current month ration status. 
+➼ Previous records of their ration.
+```
 
 
 
@@ -91,7 +102,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Copyright © 2020 Rohan Mistry
 
 
 
@@ -101,25 +112,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Your Name - [Rohan Mistry](https://www.linkedin.com/in/rohan-mistry-826714180/) - mistryrohan13@gmail.com
 
 Project Link: [https://github.com/rohan-mistry/Ration-PDS](https://github.com/rohan-mistry/Ration-PDS)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
-
-
-
