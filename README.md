@@ -1,9 +1,3 @@
-<!--
-*** Thanks for checking out this README Template. If you have a suggestion that would
-*** make this better, please fork the repo and create a pull request or simply open
-
-
-
 
 <!-- PROJECT LOGO -->
 <br />
@@ -38,22 +32,16 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
+The Indian food security system was established by the Government Of India under the Ministry of Consumer Affairs, Food and Public Distribution to distribute food and non-food items to India's poor at subsidised rates.
+But the FPS have been misusing the grains recieved by the government for their own profits.To reduce such conspiracy ,was the main motive behind this project.
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+To handle the control of entire flow of the PDS system ,this application will be useful.
 
 ### Built With
 
 * [Django 3.0.3](https://docs.djangoproject.com/en/3.0/)
 * [Python 3.6](https://www.python.org/doc/)
-
+* [ReportLab](https://www.reportlab.com/opensource/)
 
 
 <!-- GETTING STARTED -->
@@ -110,9 +98,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Your Name - [Rohan Mistry](https://www.linkedin.com/in/rohan-mistry-826714180/) - mistryrohan13@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/rohan-mistry/Ration-PDS](https://github.com/rohan-mistry/Ration-PDS)
 
 
 
