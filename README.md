@@ -16,6 +16,7 @@
     <a href="https://github.com/rohan-mistry/Ration-PDS/issues">Report Bug</a>
     ·
     <a href="https://github.com/rohan-mistry/Ration-PDS/issues">Request Feature</a>
+	<a href="https://github.com/rohan-mistry/Ration-PDS/doc/img">View Screenshots</a>
   </p>
 </p>
 
@@ -84,11 +85,11 @@ python manage.py runserver
 ```
 - FPS
 ```sh
-➼ Current stock available. 
+➼ Current stock availability. 
 ➼ Incoming stocks from the Government.
 ➼ Sell Monthly ration to only registered customers under their shop.
 ➼ Send monthly stock requests and reports. 
-➼ See registerd customers under their shop. 
+➼ See registered customers under their shop. 
 ```
 - Customer
 ```sh
@@ -109,6 +110,6 @@ Copyright © 2020 Rohan Mistry
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [Rohan Mistry](https://www.linkedin.com/in/rohan-mistry-826714180/) - mistryrohan13@gmail.com
+[Rohan Mistry](https://www.linkedin.com/in/rohan-mistry-826714180/) - mistryrohan13@gmail.com
 
 Project Link: [https://github.com/rohan-mistry/Ration-PDS](https://github.com/rohan-mistry/Ration-PDS)
