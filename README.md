@@ -16,7 +16,8 @@
     <a href="https://github.com/rohan-mistry/Ration-PDS/issues">Report Bug</a>
     ·
     <a href="https://github.com/rohan-mistry/Ration-PDS/issues">Request Feature</a>
-	<a href="https://github.com/rohan-mistry/Ration-PDS/doc/img">View Screenshots</a>
+	.
+	<a href="https://github.com/rohan-mistry/Ration-PDS/doc/img/">View Screenshots</a>
   </p>
 </p>
 
